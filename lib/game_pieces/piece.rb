@@ -10,4 +10,7 @@ class Piece
     color == 'white' ? self.class::WHITE : self.class::BLACK
   end
 
+  def moves
+    self.class::MOVES
+  end
 end
