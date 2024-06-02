@@ -55,6 +55,20 @@ class Board
     puts column_legend
   end
 
+  def move(str)
+    return false unless validate_algebraic_notation(str)
+
+    return castling(str) if str.match?(/^O-O(-O)?$/)
+
+    piece = define_piece(str)
+    origin = define_origin(str)
+    capture = str.match?(/x/)
+    moves = piece.moves(capture)
+
+    # TO DO
+    
+  end
+
   private
 
   attr_writer :board, :history, :active_player
@@ -62,6 +76,7 @@ class Board
   def validate_algebraic_notation(str)
     str.match?(/^([KQBNR]?[a-h]?[1-8]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
   end
+
   def define_piece(str)
     case str[0]
     when 'K' then King
