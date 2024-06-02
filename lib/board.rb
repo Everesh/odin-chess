@@ -71,4 +71,17 @@ class Board
     when 'R' then Rook
     else Pawn end
   end
+
+  def define_origin(str)
+    origin = [nil, nil]
+    restrains = str.match(/^[KQBNR]?([a-h]?[1-8]?)?x?[a-h][1-8]/).captures[0]
+    restrains.each_char do |element|
+      if element.match?(/[a-h]/)
+        origin[1] = element.ord - 'a'.ord
+      else
+        origin[0] = element.to_i - 1
+      end
+    end
+    origin
+  end
 end
