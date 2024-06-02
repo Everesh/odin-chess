@@ -6,7 +6,7 @@ class Pawn < Piece
   MOVES = [[1,0]].freeze
   CAPTURE_MOVES = [[1,1], [1,-1]]
 
-  def moves(capture = false)
+  def self.moves(capture = false)
     capture ? CAPTURE_MOVES : MOVES
   end
 end

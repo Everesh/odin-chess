@@ -9,8 +9,4 @@ class Piece
   def symb
     color == 'white' ? self.class::WHITE : self.class::BLACK
   end
-
-  def moves(_ = nil)
-    self.class::MOVES
-  end
 end

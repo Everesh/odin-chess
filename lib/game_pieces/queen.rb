@@ -6,4 +6,8 @@ class Queen < Piece
   WHITE = '♕'.freeze
   BLACK = '♛'.freeze
   MOVES = (Rook::MOVES + Bishop::MOVES).freeze
+
+  def self.moves(_ = nil)
+    MOVES
+  end
 end
