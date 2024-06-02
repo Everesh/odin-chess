@@ -8,14 +8,14 @@ require_relative 'game_pieces/king'
 class Board
 
   attr_reader :board
-    
+
   def initialize
     @board = Array.new(8) { Array.new(8) }
     set
   end
 
   def set
-    8.times.width_index do |index|
+    8.times do |index|
       board[1][index] = Pawn.new('white')
       board[-2][index] = Pawn.new('black')
       board[2..-3].each { |row| row[index] = ' ' }
@@ -38,7 +38,21 @@ class Board
       end
     end
   end
-  
+
+  def print_state
+    column_legend = '    A   B   C   D   E   F   G   H    '.freeze
+    separator = '  +---+---+---+---+---+---+---+---+  '.freeze
+    puts column_legend
+    puts separator
+    8.times do |row|
+      print "#{8 - row} |"
+      8.times { |column| print " #{board[row][column] == ' ' ? ' ' : board[row][column].symb} |" }
+      puts " #{8 - row}"
+      puts separator
+    end
+    puts column_legend
+  end
+
   private
 
   attr_writer :board
