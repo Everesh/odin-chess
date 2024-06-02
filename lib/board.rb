@@ -7,10 +7,11 @@ require_relative 'game_pieces/king'
 
 class Board
 
-  attr_reader :board
+  attr_reader :board, :history
 
   def initialize
     @board = Array.new(8) { Array.new(8) }
+    @history = []
     set
   end
 
@@ -55,5 +56,5 @@ class Board
 
   private
 
-  attr_writer :board
+  attr_writer :board, :history
 end
