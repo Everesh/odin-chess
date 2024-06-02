@@ -60,6 +60,6 @@ class Board
   attr_writer :board, :history, :active_player
 
   def validate_algebraic_notation(str)
-    str.match?(/^([KQBNR]?[1-8]?[a-h]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
+    str.match?(/^([KQBNR]?[a-h]?[1-8]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
   end
 end
