@@ -48,7 +48,7 @@ class Board
     puts separator
     8.times do |row|
       print "#{8 - row} |"
-      8.times { |column| print " #{board[7 - row][column] == ' ' ? ' ' : board[7 - row][column].symb} |" }
+      8.times { |column| print " #{board[7 - row][column].is_a?(Piece) ? board[7 - row][column].symb : ' '} |" }
       puts " #{8 - row}"
       puts separator
     end
@@ -59,4 +59,7 @@ class Board
 
   attr_writer :board, :history, :active_player
 
+  def validate_algebraic_notation(str)
+    str.match?(/^([KQBNR]?[1-8]?[a-h]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
+  end
 end
