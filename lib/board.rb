@@ -62,4 +62,13 @@ class Board
   def validate_algebraic_notation(str)
     str.match?(/^([KQBNR]?[a-h]?[1-8]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
   end
+  def define_piece(str)
+    case str[0]
+    when 'K' then King
+    when 'Q' then Queen
+    when 'B' then Bishop
+    when 'N' then Knight
+    when 'R' then Rook
+    else Pawn end
+  end
 end
