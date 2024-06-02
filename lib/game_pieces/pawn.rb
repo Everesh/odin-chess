@@ -3,5 +3,10 @@ require_relative 'piece'
 class Pawn < Piece
   WHITE = '♙'.freeze
   BLACK = '♟︎'.freeze
-  MOVES = [[0,1]].freeze
+  MOVES = [[1,0]].freeze
+  CAPTURE_MOVES = [[1,1], [1,-1]]
+
+  def moves(capture = false)
+    capture ? CAPTURE_MOVES : MOVES
+  end
 end
