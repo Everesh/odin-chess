@@ -66,8 +66,14 @@ class Board
     target = define_target(str)
     origin = defefine_origin(define_origin_constrain(str), target, moves)
 
-    # TO DO
+    if legal_move(piece, capture, moves, origin, target)
+      board[target[0]][target[1]] = board[origin[0]][origin[1]]
+      board[origin[0]][origin[1]] = ' '
+      history << str
+      return true
+    end
 
+    false
   end
 
   private
@@ -118,6 +124,13 @@ class Board
 
     # TO DO
     # Returns an array with coordinates of the piece that is being moved
+
+  end
+
+  def legal_move(piece, capture, moves, origin, target)
+
+    # TO DO
+    # Returns a bool if a move is legal, check history for # and +
 
   end
 end
