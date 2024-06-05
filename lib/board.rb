@@ -61,13 +61,13 @@ class Board
     return castling(str) if str.match?(/^O-O(-O)?$/)
 
     piece = define_piece(str)
-    origin = define_origin(str)
     capture = str.match?(/x/)
     moves = piece.moves(capture)
     target = define_target(str)
+    origin = defefine_origin(define_origin_constrain(str), target, moves)
 
     # TO DO
-    
+
   end
 
   private
@@ -88,7 +88,11 @@ class Board
     else Pawn end
   end
 
-  def define_origin(str)
+  def define_target(str)
+    str.match(/^[KQBNR]?[a-h]?[1-8]?x?([a-h][1-8])/).captures[0].chars
+  end
+
+  def define_origin_constrain(str)
     origin = [nil, nil]
     restrains = str.match(/^[KQBNR]?([a-h]?[1-8]?)?x?[a-h][1-8]/).captures[0]
     restrains.each_char do |element|
@@ -99,5 +103,12 @@ class Board
       end
     end
     origin
+  end
+
+  def define_origin(origin, target, moves)
+
+    # TO DO
+    # Returns an array with coordinates of the piece that is being moved
+
   end
 end
