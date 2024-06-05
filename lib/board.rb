@@ -89,7 +89,16 @@ class Board
   end
 
   def define_target(str)
-    str.match(/^[KQBNR]?[a-h]?[1-8]?x?([a-h][1-8])/).captures[0].chars
+    target = [nil, nil]
+    restrains = str.match(/^[KQBNR]?[a-h]?[1-8]?x?([a-h][1-8])/).captures[0]
+    restrains.each_char do |element|
+      if element.match?(/[a-h]/)
+        target[1] = element.ord - 'a'.ord
+      else
+        target[0] = element.to_i - 1
+      end
+    end
+    target
   end
 
   def define_origin_constrain(str)
