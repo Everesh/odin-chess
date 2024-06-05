@@ -66,7 +66,7 @@ class Board
     target = define_target(str)
     origin = defefine_origin(define_origin_constrain(str), target, moves)
 
-    if legal_move(piece, capture, moves, origin, target)
+    if legal_move?(piece, capture, moves, origin, target)
       board[target[0]][target[1]] = board[origin[0]][origin[1]]
       board[origin[0]][origin[1]] = ' '
       history << str
@@ -127,7 +127,7 @@ class Board
 
   end
 
-  def legal_move(piece, capture, moves, origin, target)
+  def legal_move?(piece, capture, moves, origin, target)
 
     # TO DO
     # Returns a bool if a move is legal, check history for # and +
