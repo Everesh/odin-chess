@@ -64,6 +64,7 @@ class Board
     origin = define_origin(str)
     capture = str.match?(/x/)
     moves = piece.moves(capture)
+    target = define_target(str)
 
     # TO DO
     
