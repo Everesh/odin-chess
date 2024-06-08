@@ -13,7 +13,7 @@ save [uninterupted_string]
 ## Load command
 
 On start if a save file is present in `saves/` it will be listed and can be loaded
-either via its designated number or file name *without the .yml suffix
+either via its designated number
 
 ```
 [1-n | uninterupted_string]
