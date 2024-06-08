@@ -8,7 +8,7 @@ SAVES = Dir.entries('./saves').reject { |entry| ['.', '..'].include?(entry) }.fr
 class Chess
   include Printer
 
-  attr_reader :board
+  attr_reader :board, :active_player, :history
 
   def initialize
     print_welcome
@@ -42,7 +42,7 @@ class Chess
       action = get_action
       break if action == 'save'
 
-      board.move((history << action)[-1])
+      board.move((history << action)[-1], active_player)
       print_state
       active_player = active_player == 'white' ? 'black' : 'white'
     end
@@ -52,14 +52,16 @@ class Chess
 
   private
 
+  attr_writer :board, :active_player, :history
+
   def get_action
     puts "#{active_player.upcase} is on the play, make your move:"
     begin
       action = gets.chomp
       return 'save' if action.downcase == 'save'
-      
+
       raise RegexpError unless action.match?(/^([KQBNR]?[a-h]?[1-8]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
-      raise ArgumentError unless board.legal_move?(action)
+      raise ArgumentError unless board.legal_move?(action, active_player)
     rescue RegexpError
       puts "# '#{action}' is not a valid syntax, use the algebraic notation or the keyword save"
       retry
