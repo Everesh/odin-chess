@@ -32,18 +32,52 @@ class Chess
 
   def init_new
     @board = Board.new
-    @active_player = 1
+    @active_player = 'white'
     @history = []
     play
   end
 
   def play
+    until board.concluded?
+      action = get_action
+      break if action == 'save'
 
-    # TO DO
+      board.move((history << action)[-1])
+      print_state
+      active_player = active_player == 'white' ? 'black' : 'white'
+    end
 
+    conclude(action)
   end
 
   private
+
+  def get_action
+    # validate from board before passing
+    # TO DO
+    # return action [algebraic notation | save]
+  end
+
+  def prompt_save
+    puts 'Give me the file name:'
+    begin
+      file_name = gets.scan(/\w+/)
+      raise StandardError if file_name.size != 1 || file_name[0].length < 1
+    rescue StandardError
+      puts '# Invalid file name, must be at least 1 long and not be separated by white spaces'
+      retry
+    end
+    save_as(file_name)
+  end
+
+  def conclude(action)
+    if action == 'save'
+      prompt_save
+      puts 'Game saved. See ya!'
+    else
+      puts "GGs! #{active_player == 'white' ? 'BLACK' : 'WHITE'} WINS! 🏆"
+    end
+  end
 
   def load_input
     puts "Select a files [0 - #{SAVES.length - 1}] or type NEW to create a new game"
@@ -68,5 +102,4 @@ class Chess
       YAML.dump(instance_data, file)
     end
   end
-
 end

@@ -22,4 +22,16 @@ class Board
                     King.new('black'), Bishop.new('black'),
                     Knight.new('black'), Rook.new('black')]
     end
+
+    def move(algebraic_notation)
+
+      # TO DO
+
+    end
+
+    def concluded?
+
+      # TO DO
+
+    end
 end
