@@ -1,4 +1,5 @@
 require_relative 'printer'
+require_relative 'board'
 
 SAVES = Dir.entries("./saves").reject { |entry| entry == '.' || entry == '..' }.freeze
 
@@ -26,9 +27,9 @@ class Chess
   end
 
   def init_new
-
-    @board
-
+    @board = Board.new
+    @active_player = 1
+    @history = []
   end
 
   def play
