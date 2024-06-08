@@ -53,9 +53,21 @@ class Chess
   private
 
   def get_action
-    # validate from board before passing
-    # TO DO
-    # return action [algebraic notation | save]
+    puts "#{active_player.upcase} is on the play, make your move:"
+    begin
+      action = gets.chomp
+      return 'save' if action.downcase == 'save'
+      
+      raise RegexpError unless action.match?(/^([KQBNR]?[a-h]?[1-8]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
+      raise ArgumentError unless board.legal_move?(action)
+    rescue RegexpError
+      puts "# '#{action}' is not a valid syntax, use the algebraic notation or the keyword save"
+      retry
+    rescue ArgumentError
+      puts "# '#{action}' is not a legal move"
+      retry
+    end
+    action
   end
 
   def prompt_save
