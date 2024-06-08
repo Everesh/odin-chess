@@ -1,11 +1,13 @@
 require_relative 'printer'
 
+SAVES = Dir.entries("./saves").reject { |entry| entry == '.' || entry == '..' }.freeze
+
 class Chess
   include Printer
 
-  def initialization
+  def initialize
     print_welcome
-    if Dir.entries("./saves").length > 0
+    if SAVES.length.positive?
       init_load
     else
       init_new
@@ -13,11 +15,11 @@ class Chess
   end
 
   def init_load
-    list(Dir.entries("./saves"))
+    list(SAVES)
     loading = load_input
     return init_new if loading == -1
 
-    data = YAML.load File.open(Dir.entries("./saves")[loading], 'r')
+    data = YAML.load File.open(SAVES[loading], 'r')
     data.each { |key, val| instance_variable_set("@#{key}", val) }
     play
   end
@@ -37,12 +39,12 @@ class Chess
   private
 
   def load_input
-    puts "Select a files [0 - #{Dir.entries("./saves").length}] or NEW"
+    puts "Select a files [0 - #{SAVES.length - 1}] or NEW"
     begin
       input = gets.chomp.downcase
       return -1 if input == 'new'
 
-      raise StandardError if input.to_i.negative? || input.to_i >= Dir.entries("./saves").length
+      raise StandardError if input.to_i.negative? || SAVES.length <= input.to_i
     rescue StandardError
       puts '# Wrong input, try again'
       retry
