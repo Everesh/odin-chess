@@ -38,6 +38,11 @@ class Board
     def concluded?
 
       # TO DO
+      # is a pad? || is a mat? || do both players habe insufficient material?
 
     end
+
+    private
+
+    attr_writer :board
 end

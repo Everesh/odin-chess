@@ -41,8 +41,8 @@ The game ends if
     - lone kings
     - king and a knight
     - king and a bishop
-- A player concedes (win)
-- Both players agree to a draw (draw)
+- A player concedes (win) #Not implemented yet
+- Both players agree to a draw (draw) #Not implemented yet
 - The exact same position appears 3 times (draw) #Not implemented for the sake of my sanity
 
 ## Move sets
