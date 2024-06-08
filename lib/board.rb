@@ -7,6 +7,8 @@ require_relative 'pieces/pawn'
 
 class Board
 
+    attr_reader :board
+
     def initialize
         @board = Array.new(8) { Array.new(8) {' '} }
         @board[0] = [Rook.new('white'), Knight.new('white'),
