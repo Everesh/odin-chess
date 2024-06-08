@@ -27,7 +27,7 @@ class Chess
 
   def init_new
 
-    # TO DO
+    @board
 
   end
 
@@ -51,6 +51,12 @@ class Chess
       retry
     end
     input.to_i
+  end
+
+  def save_as(str)
+    File.open('./saves/'.concat(str.concat('.yml')), 'w') do |file|
+      YAML.dump(instance_variables.each_with_object({}) { |var, hash| hash[var.to_s.delete('@')] = instance_variable_get(var) }, file)
+    end
   end
 
 end
