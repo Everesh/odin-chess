@@ -8,7 +8,7 @@ module Printer
   end
 
   def list(arr)
-    arr.each_with_index { |elem, index| puts "#{index} #{elem.to_s}" }
+    arr.each_with_index { |elem, index| puts "#{index} #{elem}" }
   end
 
   def print_state
