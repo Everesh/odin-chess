@@ -34,6 +34,7 @@ class Chess
     @board = Board.new
     @active_player = 1
     @history = []
+    play
   end
 
   def play
