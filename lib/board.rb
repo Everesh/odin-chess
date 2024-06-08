@@ -15,8 +15,8 @@ class Board
                     Bishop.new('white'), Queen.new('white'),
                     King.new('white'), Bishop.new('white'),
                     Knight.new('white'), Rook.new('white')]
-        @board[1] = array.new(8) { Pawn.new('white') }
-        @board[6] = array.new(8) { Pawn.new('black') }
+        @board[1] = Array.new(8) { Pawn.new('white') }
+        @board[6] = Array.new(8) { Pawn.new('black') }
         @board[7] = [Rook.new('black'), Knight.new('black'),
                     Bishop.new('black'), Queen.new('black'),
                     King.new('black'), Bishop.new('black'),
