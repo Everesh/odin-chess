@@ -1,0 +1,133 @@
+---
+board: !ruby/object:Board
+  board:
+  - - !ruby/object:Rook
+      color: white
+      chr: "♖"
+    - !ruby/object:Knight
+      color: white
+      chr: "♘"
+    - !ruby/object:Bishop
+      color: white
+      chr: "♗"
+    - !ruby/object:Queen
+      color: white
+      chr: "♕"
+    - !ruby/object:King
+      color: white
+      chr: "♔"
+    - !ruby/object:Bishop
+      color: white
+      chr: "♗"
+    - " "
+    - !ruby/object:Rook
+      color: white
+      chr: "♖"
+  - - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+    - " "
+    - " "
+    - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - !ruby/object:Knight
+      color: white
+      chr: "♘"
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      chr: "♙"
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - !ruby/object:Knight
+      color: black
+      chr: "♞"
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+    - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+    - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+    - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+    - " "
+    - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+    - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+    - !ruby/object:Pawn
+      color: black
+      chr: "♟︎"
+  - - !ruby/object:Rook
+      color: black
+      chr: "♜"
+    - " "
+    - !ruby/object:Bishop
+      color: black
+      chr: "♝"
+    - !ruby/object:Queen
+      color: black
+      chr: "♛"
+    - !ruby/object:King
+      color: black
+      chr: "♚"
+    - !ruby/object:Bishop
+      color: black
+      chr: "♝"
+    - !ruby/object:Knight
+      color: black
+      chr: "♞"
+    - !ruby/object:Rook
+      color: black
+      chr: "♜"
+active_player: 2
+history: ['e4', 'e5', 'Kf3', 'Kc6', 'd4']
