@@ -1,7 +1,7 @@
 require_relative 'printer'
 require_relative 'board'
 
-SAVES = Dir.entries("./saves").reject { |entry| entry == '.' || entry == '..' }.freeze
+SAVES = Dir.entries('./saves').reject { |entry| ['.', '..'].include?(entry) }.freeze
 
 class Chess
   include Printer
@@ -55,8 +55,12 @@ class Chess
   end
 
   def save_as(str)
-    File.open('./saves/'.concat(str.concat('.yml')), 'w') do |file|
-      YAML.dump(instance_variables.each_with_object({}) { |var, hash| hash[var.to_s.delete('@')] = instance_variable_get(var) }, file)
+    instance_data = instance_variables.each_with_object({}) do |var, hash|
+      hash[var.to_s.delete('@')] = instance_variable_get(var)
+    end
+
+    File.open("./saves/#{str}.yml", 'w') do |file|
+      YAML.dump(instance_data, file)
     end
   end
 
