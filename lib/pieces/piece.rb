@@ -1,4 +1,4 @@
-class pieces
+class Pieces
 
     attr_reader :color
 
