@@ -15,6 +15,7 @@ class Chess
   end
 
   def init_load
+    puts 'Looks like you have some saves:'
     list(SAVES)
     loading = load_input
     return init_new if loading == -1
@@ -39,7 +40,7 @@ class Chess
   private
 
   def load_input
-    puts "Select a files [0 - #{SAVES.length - 1}] or NEW"
+    puts "Select a files [0 - #{SAVES.length - 1}] or type NEW to create a new game"
     begin
       input = gets.chomp.downcase
       return -1 if input == 'new'
