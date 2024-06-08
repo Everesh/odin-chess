@@ -6,6 +6,8 @@ SAVES = Dir.entries('./saves').reject { |entry| ['.', '..'].include?(entry) }.fr
 class Chess
   include Printer
 
+  attr_reader :board
+
   def initialize
     print_welcome
     if SAVES.length.positive?
