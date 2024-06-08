@@ -1,6 +1,8 @@
 require_relative 'printer'
 require_relative 'board'
 
+require 'yaml'
+
 SAVES = Dir.entries('./saves').reject { |entry| ['.', '..'].include?(entry) }.freeze
 
 class Chess
@@ -23,7 +25,7 @@ class Chess
     loading = load_input
     return init_new if loading == -1
 
-    data = YAML.load File.open(SAVES[loading], 'r')
+    data = YAML.unsafe_load File.open("./saves/#{SAVES[loading]}", 'r')
     data.each { |key, val| instance_variable_set("@#{key}", val) }
     play
   end
@@ -32,6 +34,7 @@ class Chess
     @board = Board.new
     @active_player = 1
     @history = []
+    save_as('default_state')
   end
 
   def play
