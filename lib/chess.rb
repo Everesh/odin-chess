@@ -34,7 +34,6 @@ class Chess
     @board = Board.new
     @active_player = 1
     @history = []
-    save_as('default_state')
   end
 
   def play
