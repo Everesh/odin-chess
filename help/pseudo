@@ -1,0 +1,20 @@
+print welcome
+if at least 1 save
+    List saves
+    If player selects a save
+        load state from YAML
+    else
+        initialize
+else
+    initialize
+until game winner? || saved
+    take current_players input until valid
+        accepts a valid algebraic notation
+        accepts a save command
+    perform move
+    print state
+    switch active player
+if winner?
+    print congratulation message
+else
+    print save aknowledgment
