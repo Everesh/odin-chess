@@ -102,7 +102,7 @@ class Chess
 
       raise StandardError if input.to_i.negative? || SAVES.length <= input.to_i
     rescue StandardError
-      puts '# Wrong input, try again'
+      puts '# Invalid input, try again'
       retry
     end
     input.to_i
