@@ -24,15 +24,15 @@ class Board
     end
 
     def legal_move?(algebraic_notation, active_player)
-
+        true
       # TO DO
 
     end
 
     def move(algebraic_notation, active_player)
-
-      # TO DO
-
+      parse(algebraic_notation, active_player)
+      board[target[0]][target[1]] = board[origin[0]][origin[1]]
+      board[origin[0]][origin[1]] = ' '
     end
 
     def concluded?
@@ -45,4 +45,64 @@ class Board
     private
 
     attr_writer :board
+    attr_accessor :piece, :target, :capture, :origin
+
+    def parse(algebraic_notation, active_player)
+      return castling(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
+
+      @piece = define_piece(algebraic_notation)
+      @target = define_target(algebraic_notation)
+      @capture = algebraic_notation.match?(/x/)
+      @origin = define_origin(algebraic_notation)
+    end
+
+    def define_piece(str)
+      case str[0]
+      when 'K' then King
+      when 'Q' then Queen
+      when 'B' then Bishop
+      when 'N' then Knight
+      when 'R' then Rook
+      else Pawn end
+    end
+
+    def define_target(str)
+      target = [nil, nil]
+      restrains = str.match(/^[KQBNR]?[a-h]?[1-8]?x?([a-h][1-8])/).captures[0]
+      restrains.each_char do |element|
+        if element.match?(/[a-h]/)
+          target[1] = element.ord - 'a'.ord
+        else
+          target[0] = element.to_i - 1
+        end
+      end
+      target
+    end
+
+    def define_origin(str)
+        origin = define_origin_constrain(str)
+
+        # TO DO, if origin is not explicit in the notation
+
+        origin
+    end
+
+    def define_origin_constrain(str)
+      origin = [nil, nil]
+      restrains = str.match(/^[KQBNR]?([a-h]?[1-8]?)?x?[a-h][1-8]/).captures[0]
+      restrains.each_char do |element|
+        if element.match?(/[a-h]/)
+          origin[1] = element.ord - 'a'.ord
+        else
+          origin[0] = element.to_i - 1
+        end
+      end
+      origin
+    end
+
+    def castling(algebraic_notation, active_player)
+
+      # TO DO
+
+    end
 end
