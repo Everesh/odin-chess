@@ -129,5 +129,5 @@ board: !ruby/object:Board
     - !ruby/object:Rook
       color: black
       chr: "♜"
-active_player: 2
+active_player: 'black'
 history: ['e4', 'e5', 'Kf3', 'Kc6', 'd4']
