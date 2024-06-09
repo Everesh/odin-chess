@@ -27,6 +27,7 @@ class Chess
 
     data = YAML.unsafe_load File.open("./saves/#{SAVES[loading]}", 'r')
     data.each { |key, val| instance_variable_set("@#{key}", val) }
+    print_state
     play
   end
 
