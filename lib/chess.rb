@@ -35,6 +35,7 @@ class Chess
     @board = Board.new
     @active_player = 'white'
     @history = []
+    print_state
     play
   end
 
@@ -45,7 +46,7 @@ class Chess
 
       board.move((history << action)[-1], active_player)
       print_state
-      active_player = active_player == 'white' ? 'black' : 'white'
+      self.active_player = active_player == 'white' ? 'black' : 'white'
     end
 
     conclude(action)
