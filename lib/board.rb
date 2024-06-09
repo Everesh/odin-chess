@@ -30,9 +30,15 @@ class Board
     end
 
     def move(algebraic_notation, active_player)
+      return castling(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
+
       parse(algebraic_notation, active_player)
+      if piece.is_a?(Pawn) && capture && board[target[0]][target[1]] == ' '
+        en_pasant(algebraic_notation, active_player) 
+      end
       board[target[0]][target[1]] = board[origin[0]][origin[1]]
       board[origin[0]][origin[1]] = ' '
+      promote(algebraic_notation, active_player) if algebraic_notation.match?(/=/)
     end
 
     def concluded?
@@ -48,8 +54,6 @@ class Board
     attr_accessor :piece, :target, :capture, :origin
 
     def parse(algebraic_notation, active_player)
-      return castling(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
-
       @piece = define_piece(algebraic_notation)
       @target = define_target(algebraic_notation)
       @capture = algebraic_notation.match?(/x/)
@@ -101,6 +105,18 @@ class Board
     end
 
     def castling(algebraic_notation, active_player)
+
+      # TO DO
+
+    end
+
+    def promote(algebraic_notation, active_player)
+
+      # TO DO
+
+    end
+
+    def en_pasant(algebraic_notation, active_player)
 
       # TO DO
 
