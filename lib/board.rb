@@ -103,10 +103,14 @@ class Board
       board[row][6] = board[row][4]
       board[row][5] = board[row][7]
       board[row][7] = board[row][4] = ' '
+      board[row][6].has_made_a_move
+      board[row][5].has_made_a_move
     else
       board[row][2] = board[row][4]
       board[row][3] = board[row][0]
       board[row][0] = board[row][4] = ' '
+      board[row][2].has_made_a_move
+      board[row][3].has_made_a_move
     end
   end
 
