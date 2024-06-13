@@ -63,7 +63,7 @@ class Chess
       return 'save' if action.downcase == 'save'
 
       raise RegexpError unless action.match?(/^([KQBNR]?[a-h]?[1-8]?x?[a-h][1-8](=[QBNR])?[+#]?|O-O(-O)?)$/)
-      raise ArgumentError unless board.legal_move?(action, active_player)
+      raise ArgumentError unless board.legal_move?(action, active_player, history)
     rescue RegexpError
       puts "# '#{action}' is not a valid syntax, use the algebraic notation or the keyword save"
       retry

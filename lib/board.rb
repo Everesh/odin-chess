@@ -22,7 +22,8 @@ class Board
                  Knight.new('black'), Rook.new('black')]
   end
 
-  def legal_move?(_algebraic_notation, _active_player)
+  def legal_move?(_algebraic_notation, _active_player, _history)
+    parse(algebraic_notation, active_player)
     true
     # TO DO
   end
