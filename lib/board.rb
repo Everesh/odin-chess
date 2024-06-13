@@ -100,13 +100,13 @@ class Board
   def castle(algebraic_notation, active_player)
     row = active_player == 'white' ? 0 : 7
     if algebraic_notation.match?(/^O-O$/)
-      board[row][5] = board[row][4]
-      board[row][4] = board[row][7]
-      board[row][7] = ' '
+      board[row][6] = board[row][4]
+      board[row][5] = board[row][7]
+      board[row][7] = board[row][4] = ' '
     else
-      board[row][3] = board[row][4]
-      board[row][4] = board[row][0]
-      board[row][0] = ' '
+      board[row][2] = board[row][4]
+      board[row][3] = board[row][0]
+      board[row][0] = board[row][4] = ' '
     end
   end
 
