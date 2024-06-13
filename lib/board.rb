@@ -28,7 +28,7 @@ class Board
   end
 
   def move(algebraic_notation, active_player)
-    return castling(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
+    return castle(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
 
     parse(algebraic_notation, active_player)
     en_pasant(algebraic_notation, active_player) if piece.is_a?(Pawn) && capture && board[target[0]][target[1]] == ' '
@@ -97,8 +97,17 @@ class Board
     origin
   end
 
-  def castling(algebraic_notation, active_player)
-    # TO DO
+  def castle(algebraic_notation, active_player)
+    row = active_player == 'white' ? 0 : 7
+    if algebraic_notation.match?(/^O-O$/)
+      board[row][5] = board[row][4]
+      board[row][4] = board[row][7]
+      board[row][7] = ' '
+    else
+      board[row][3] = board[row][4]
+      board[row][4] = board[row][0]
+      board[row][0] = ' '
+    end
   end
 
   def promote(algebraic_notation, active_player)
