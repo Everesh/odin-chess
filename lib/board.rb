@@ -34,6 +34,7 @@ class Board
     en_pasant(algebraic_notation, active_player) if piece.is_a?(Pawn) && capture && board[target[0]][target[1]] == ' '
     board[target[0]][target[1]] = board[origin[0]][origin[1]]
     board[origin[0]][origin[1]] = ' '
+    board[target[0]][target[1]].has_made_a_move
     promote(algebraic_notation, active_player) if algebraic_notation.match?(/=/)
   end
 
