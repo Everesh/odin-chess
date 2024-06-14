@@ -23,9 +23,12 @@ class Board
   end
 
   def legal_move?(algebraic_notation, active_player, _history)
-    parse(algebraic_notation, active_player)
+    begin
+      parse(algebraic_notation, active_player)
+    rescue StandardError
+      return false
+    end
     true
-    # TO DO
   end
 
   def move(algebraic_notation, active_player)
@@ -83,14 +86,32 @@ class Board
     origin = define_origin_constrain(algebraic_notation) # [[nil,0-7],[nil, 0-7]]
     return origin if origin.all? { |val| !val.nil? }
 
-    case piece
-    when King then find_king(origin, active_player)
-    when Queen then find_queen(origin, active_player)
-    when Bishop then find_bishop(origin, active_player)
-    when Knight then find_knight(origin, active_player)
-    when Rook then find_rook(origin, active_player)
-    when Pawn then find_pawn(origin, active_player)
+    if piece == King
+      find_king(origin, active_player)
+    elsif piece == Queen
+      find_queen(origin, active_player)
+    elsif piece == Bishop
+      find_bishop(origin, active_player)
+    elsif piece == Knight
+      find_knight(origin, active_player)
+    elsif piece == Rook
+      find_rook(origin, active_player)
+    elsif piece == Pawn
+      find_pawn(origin, active_player)
     end
+  end
+
+  def find_king(origin, active_player)
+    [[0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1], [1, 0], [1, 1]].each do |move|
+      next unless (0..7).include?(target[0] + move[0]) && (0..7).include?(target[1] + move[1])
+
+      next unless (origin[0].nil? || origin[0] == target[0] + move[0]) && (origin[1].nil? || origin[1] == target[1] + move[1])
+
+      contender = board[target[0] + move[0]][target[1] + move[1]]
+      return [target[0] + move[0], target[1] + move[1]] if contender.is_a?(King) && contender.color == active_player
+    end
+    puts '## Failed to find the king'
+    raise StandardError
   end
 
   def define_origin_constrain(str)
