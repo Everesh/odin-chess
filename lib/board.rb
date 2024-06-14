@@ -114,6 +114,36 @@ class Board
     raise StandardError
   end
 
+  def find_queen(origin, active_player)
+
+    # TO DO
+
+  end
+
+  def find_bishop(origin, active_player)
+
+    # TO DO
+
+  end
+
+  def find_knight(origin, active_player)
+
+    # TO DO
+
+  end
+
+  def find_rook(origin, active_player)
+
+    # TO DO
+
+  end
+
+  def find_pawn(origin, active_player)
+
+    # TO DO
+
+  end
+
   def define_origin_constrain(str)
     origin = [nil, nil]
     restrains = str.match(/^[KQBNR]?([a-h]?[1-8]?)?x?[a-h][1-8]/).captures[0]
