@@ -42,6 +42,8 @@ class Board
       return false if algebraic_notation.match?(/[#+]$/)
     end
 
+    return false if piece == Pawn && (target[0] == 0 || target[0] == 7) && !algebraic_notation.match?(/=/)
+
     true
   end
 
