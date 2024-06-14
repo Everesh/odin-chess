@@ -32,7 +32,7 @@ class Board
     return castle(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
 
     parse(algebraic_notation, active_player)
-    en_pasant(algebraic_notation, active_player) if piece.is_a?(Pawn) && capture && board[target[0]][target[1]] == ' '
+    en_pasant if piece == Pawn && capture && board[target[0]][target[1]] == ' '
     board[target[0]][target[1]] = board[origin[0]][origin[1]]
     board[origin[0]][origin[1]] = ' '
     promote(algebraic_notation, active_player) if algebraic_notation.match?(/=/)
@@ -124,7 +124,12 @@ class Board
     end
   end
 
-  def en_pasant(algebraic_notation, active_player)
-    # TO DO
+  def en_pasant
+    puts 'en passanting'
+    if target[0] == 2 # En passating white pieces
+      board[target[0] + 1][target[1]] = ' '
+    else # En passating black pieces
+      board[target[0] - 1][target[1]] = ' '
+    end
   end
 end
