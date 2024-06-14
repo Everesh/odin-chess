@@ -116,7 +116,12 @@ class Board
   end
 
   def promote(algebraic_notation, active_player)
-    # TO DO
+    case algebraic_notation.match(/=([QRBN])/).captures[0]
+    when 'Q' then board[target[0]][target[1]] = Queen.new(active_player)
+    when 'B' then board[target[0]][target[1]] = Bishop.new(active_player)
+    when 'N' then board[target[0]][target[1]] = Knight.new(active_player)
+    when 'R' then board[target[0]][target[1]] = Rook.new(active_player)
+    end
   end
 
   def en_pasant(algebraic_notation, active_player)

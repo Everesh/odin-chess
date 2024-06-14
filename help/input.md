@@ -67,7 +67,7 @@ If the move is putting a pawn at the end of the column
 promotion is needed in the form of `=(piece_name)`
 
 ```
-=([QBNR])
+=[QBNR]
 ```
 
 ### Check
