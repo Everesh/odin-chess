@@ -49,11 +49,11 @@ class Board
   attr_writer :board
   attr_accessor :piece, :target, :capture, :origin
 
-  def parse(algebraic_notation, _active_player)
+  def parse(algebraic_notation, active_player)
     @piece = define_piece(algebraic_notation)
     @target = define_target(algebraic_notation)
     @capture = algebraic_notation.match?(/x/)
-    @origin = define_origin(algebraic_notation)
+    @origin = define_origin(algebraic_notation, active_player)
   end
 
   def define_piece(str)
@@ -79,10 +79,18 @@ class Board
     target
   end
 
-  def define_origin(str)
-    define_origin_constrain(str)
+  def define_origin(algebraic_notation, active_player)
+    origin = define_origin_constrain(algebraic_notation) # [[nil,0-7],[nil, 0-7]]
+    return origin if origin.all? { |val| !val.nil? }
 
-    # TO DO, if origin is not explicit in the notation
+    case piece
+    when King then find_king(origin, active_player)
+    when Queen then find_queen(origin, active_player)
+    when Bishop then find_bishop(origin, active_player)
+    when Knight then find_knight(origin, active_player)
+    when Rook then find_rook(origin, active_player)
+    when Pawn then find_pawn(origin, active_player)
+    end
   end
 
   def define_origin_constrain(str)
