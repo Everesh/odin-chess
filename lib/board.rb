@@ -22,13 +22,41 @@ class Board
                  Knight.new('black'), Rook.new('black')]
   end
 
-  def legal_move?(algebraic_notation, active_player, _history)
+  def legal_move?(algebraic_notation, active_player, history)
     begin
       parse(algebraic_notation, active_player)
     rescue StandardError
       return false
     end
+    return false if capture && (board[target[0]][target[1]] == ' ' || board[target[0]][target[1]].color == active_player || !en_passant?(active_player, history))
+    return false if king_would_be_in_check?
+
     true
+  end
+
+  def en_passant?(active_player, history)
+    return false if piece != Pawn || board[target[0]][target[1]] != ' '
+
+    column = (target[1] + 'a'.ord).chr
+    if active_player == 'white'
+      last_move_match = history[-1].match?(/#{column}5$/)
+      any_move_match = history.any? { |move| move.match?(/^[a-h]?[1-8]?#{column}6$/) }
+    else
+      last_move_match = history[-1].match?(/#{column}4$/)
+      any_move_match = history.any? { |move| move.match?(/^[a-h]?[1-8]?#{column}3$/) }
+    end
+
+    unless last_move_match && !any_move_match
+      return false
+    end
+
+    true
+  end
+
+  def king_would_be_in_check?
+
+    # TO DO
+
   end
 
   def move(algebraic_notation, active_player)
