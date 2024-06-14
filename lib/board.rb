@@ -34,15 +34,27 @@ class Board
 
     if enemy_would_be_in_check?
       if would_conclude?
-        return false unless algebraic_notation.match?(/#$/)
+        unless algebraic_notation.match?(/#$/)
+          puts '## Tailing mat declaration required \'#\''
+          return false
+        end
       else
-        return false unless algebraic_notation.match?(/+$/)
+        unless algebraic_notation.match?(/+$/)
+          puts '## Tailing check declaration required \'+\''
+          return false
+        end
       end
     else
-      return false if algebraic_notation.match?(/[#+]$/)
+      if algebraic_notation.match?(/[#+]$/)
+        puts '## Unwarranted tailing check declaration \'+\' or \'#\''
+        return false
+      end
     end
 
-    return false if piece == Pawn && (target[0] == 0 || target[0] == 7) && !algebraic_notation.match?(/=/)
+    if piece == Pawn && (target[0] == 0 || target[0] == 7) && !algebraic_notation.match?(/=/)
+      puts '## Promotion not specified'
+      return false
+    end
 
     true
   end
