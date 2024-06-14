@@ -29,7 +29,7 @@ class Board
       return false
     end
     return false if capture && (board[target[0]][target[1]] == ' ' || board[target[0]][target[1]].color == active_player || !en_passant?(active_player, history))
-    return false if king_would_be_in_check?
+    return false if king_would_be_in_check? || (!capture && board[target[0]][target[1]] == ' ')
 
     true
   end
