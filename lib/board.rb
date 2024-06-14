@@ -29,7 +29,18 @@ class Board
       return false
     end
     return false if capture && (board[target[0]][target[1]] == ' ' || board[target[0]][target[1]].color == active_player || !en_passant?(active_player, history))
+
     return false if king_would_be_in_check? || (!capture && board[target[0]][target[1]] == ' ')
+
+    if enemy_would_be_in_check?
+      if would_conclude?
+        return false unless algebraic_notation.match?(/#$/)
+      else
+        return false unless algebraic_notation.match?(/+$/)
+      end
+    else
+      return false if algebraic_notation.match?(/[#+]$/)
+    end
 
     true
   end
@@ -59,6 +70,12 @@ class Board
 
   end
 
+  def enemy_would_be_in_check?
+
+    # TO DO
+
+  end
+
   def move(algebraic_notation, active_player)
     return castle(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
 
@@ -73,6 +90,13 @@ class Board
   def concluded?
     # TO DO
     # is a pad? || is a mat? || do both players habe insufficient material?
+  end
+
+  def would_conclude?
+
+    # TO DO
+    # Leverage concluded?, make a dube of board, perform the move on it and call concluded? on in
+
   end
 
   private
