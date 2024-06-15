@@ -28,9 +28,13 @@ class Board
     rescue StandardError
       return false
     end
-    return false if capture && (board[target[0]][target[1]] == ' ' || board[target[0]][target[1]].color == active_player || !en_passant?(active_player, history))
+    
+    if capture && (board[target[0]][target[1]] == ' ' || board[target[0]][target[1]].color == active_player || !en_passant?(active_player, history))
+      puts '## Invalid capture target'
+      return false 
+    end
 
-    return false if king_would_be_in_check? || (capture && board[target[0]][target[1]] == ' ')
+    return false if king_would_be_in_check?
 
     if enemy_would_be_in_check?
       if would_conclude?
