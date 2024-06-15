@@ -23,6 +23,8 @@ class Board
   end
 
   def legal_move?(algebraic_notation, active_player, history)
+    return can_castle?(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
+
     begin
       parse(algebraic_notation, active_player)
     rescue StandardError
@@ -89,6 +91,12 @@ class Board
     end
 
     true
+  end
+
+  def can_castle?(algebraic_notation, active_player)
+
+    # TO DO
+
   end
 
   def king_would_be_in_check?
