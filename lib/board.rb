@@ -74,6 +74,27 @@ class Board
     true
   end
 
+  def move(algebraic_notation, active_player)
+    return castle(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
+
+    parse(algebraic_notation, active_player)
+    en_pasant if piece == Pawn && capture && board[target[0]][target[1]] == ' '
+    board[target[0]][target[1]] = board[origin[0]][origin[1]]
+    board[origin[0]][origin[1]] = ' '
+    promote(algebraic_notation, active_player) if algebraic_notation.match?(/=/)
+    board[target[0]][target[1]].register_move
+  end
+
+  def concluded?
+    # TO DO
+    # is a pad? || is a mat? || do both players habe insufficient material?
+  end
+
+  private
+
+  attr_writer :board
+  attr_accessor :piece, :target, :capture, :origin
+
   def en_passant?(active_player, history)
     return false if piece != Pawn || board[target[0]][target[1]] != ' '
 
@@ -111,33 +132,12 @@ class Board
 
   end
 
-  def move(algebraic_notation, active_player)
-    return castle(algebraic_notation, active_player) if algebraic_notation.match?(/^O-O(-O)?$/)
-
-    parse(algebraic_notation, active_player)
-    en_pasant if piece == Pawn && capture && board[target[0]][target[1]] == ' '
-    board[target[0]][target[1]] = board[origin[0]][origin[1]]
-    board[origin[0]][origin[1]] = ' '
-    promote(algebraic_notation, active_player) if algebraic_notation.match?(/=/)
-    board[target[0]][target[1]].register_move
-  end
-
-  def concluded?
-    # TO DO
-    # is a pad? || is a mat? || do both players habe insufficient material?
-  end
-
   def would_conclude?
 
     # TO DO
     # Leverage concluded?, make a dube of board, perform the move on it and call concluded? on in
 
   end
-
-  private
-
-  attr_writer :board
-  attr_accessor :piece, :target, :capture, :origin
 
   def parse(algebraic_notation, active_player)
     @piece = define_piece(algebraic_notation)
