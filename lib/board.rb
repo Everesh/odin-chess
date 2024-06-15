@@ -29,7 +29,7 @@ class Board
       return false
     end
     
-    if capture && (board[target[0]][target[1]] == ' ' || board[target[0]][target[1]].color == active_player || !en_passant?(active_player, history))
+    if capture && (board[target[0]][target[1]] == ' ' ? !en_passant?(active_player, history) : false || board[target[0]][target[1]].color == active_player)
       puts '## Invalid capture target'
       return false
     end
