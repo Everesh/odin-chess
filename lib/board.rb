@@ -224,9 +224,29 @@ class Board
   end
 
   def find_bishop(origin, active_player)
+    moves = [[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]],
+             [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7]],
+             [[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7]],
+             [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7]]]
 
-    # TO DO
+    moves.each do |direction|
+      direction.each do |move|
+        break if target[0] + move[0] < 0 || target[0] + move[0] > 7 || target[1] + move[1] < 0 || target[1] + move[1] > 7
 
+        candidate = board[target[0] + move[0]][target[1] + move[1]]
+
+        next if candidate == ' '
+
+        break unless candidate.is_a?(Bishop) && candidate.color == active_player
+
+        next unless (origin[0].nil? || origin[0] == move[0]) && (origin[1].nil? || origin[1] == move[1])
+
+        return [target[0] + move[0], target[1] + move[1]]
+      end
+    end
+
+    puts '## Failed to find the Bishop'
+    raise StandardError
   end
 
   def find_knight(origin, active_player)
