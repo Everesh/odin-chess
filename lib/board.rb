@@ -31,10 +31,13 @@ class Board
     
     if capture && (board[target[0]][target[1]] == ' ' || board[target[0]][target[1]].color == active_player || !en_passant?(active_player, history))
       puts '## Invalid capture target'
-      return false 
+      return false
     end
 
-    return false if king_would_be_in_check?
+    if king_would_be_in_check?
+      puts '## Would result in putting your king in check'
+      return false
+    end
 
     if enemy_would_be_in_check?
       if would_conclude?
