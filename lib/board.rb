@@ -213,7 +213,7 @@ class Board
 
         break unless candidate.is_a?(Queen) && candidate.color == active_player
 
-        next unless (origin[0].nil? || origin[0] == move[0]) && (origin[1].nil? || origin[1] == move[1])
+        next unless (origin[0].nil? || origin[0] == target[0] - move[0]) && (origin[1].nil? || origin[1] == target[1] - move[1])
 
         return [target[0] + move[0], target[1] + move[1]]
       end
@@ -239,7 +239,7 @@ class Board
 
         break unless candidate.is_a?(Bishop) && candidate.color == active_player
 
-        next unless (origin[0].nil? || origin[0] == move[0]) && (origin[1].nil? || origin[1] == move[1])
+        next unless (origin[0].nil? || origin[0] == target[0] - move[0]) && (origin[1].nil? || origin[1] == target[1] - move[1])
 
         return [target[0] + move[0], target[1] + move[1]]
       end
@@ -261,7 +261,7 @@ class Board
 
       next unless candidate.is_a?(Knight) && candidate.color == active_player
 
-      next unless (origin[0].nil? || origin[0] == move[0]) && (origin[1].nil? || origin[1] == move[1])
+      next unless (origin[0].nil? || origin[0] == target[0] - move[0]) && (origin[1].nil? || origin[1] == target[1] - move[1])
 
       return [target[0] + move[0], target[1] + move[1]]
     end
@@ -286,7 +286,7 @@ class Board
 
         break unless candidate.is_a?(Rook) && candidate.color == active_player
 
-        next unless (origin[0].nil? || origin[0] == move[0]) && (origin[1].nil? || origin[1] == move[1])
+        next unless (origin[0].nil? || origin[0] == target[0] - move[0]) && (origin[1].nil? || origin[1] == target[1] - move[1])
 
         return [target[0] + move[0], target[1] + move[1]]
       end
