@@ -297,9 +297,30 @@ class Board
   end
 
   def find_pawn(origin, active_player)
+    if active_player == 'white'
+      moves = capture ? [[1, 1], [1, -1]] : [[1, 0], [2, 0]]
+    else
+      moves = capture ? [[-1, 1], [-1, -1]] : [[-1, 0], [-2, 0]]
+    end
 
-    # TO DO
+    moves.each do |move|
+      next if target[0] - move[0] < 0 || target[0] - move[0] > 7 || target[1] - move[1] < 0 || target[1] - move[1] > 7
 
+      candidate = board[target[0] - move[0]][target[1] - move[1]]
+
+      next if candidate == ' '
+
+      next if move[0].abs == 2 && candidate.moved?
+
+      next unless candidate.is_a?(Pawn) && candidate.color == active_player
+
+      next unless (origin[0].nil? || origin[0] == target[0] - move[0]) && (origin[1].nil? || origin[1] == target[1] - move[1])
+
+      return [target[0] - move[0], target[1] - move[1]]
+    end
+
+    puts '## Failed to find the Pawn'
+    raise StandardError
   end
 
   def define_origin_constrain(str)
