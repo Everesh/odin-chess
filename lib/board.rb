@@ -56,6 +56,12 @@ class Board
       return false
     end
 
+
+    if !capture && board[target[0]][target[1]] != ' '
+      puts '## Capture declaration required'
+      return false 
+    end
+
     true
   end
 
