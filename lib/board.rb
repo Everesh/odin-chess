@@ -115,13 +115,13 @@ class Board
 
   def checkmate?
 
-    #TO DO
+    false #TO DO
 
   end
 
   def stalemate?
 
-    #TO DO
+    false #TO DO
 
   end
 
@@ -139,31 +139,31 @@ class Board
     !history.any? { |str| str.include?('x') }
   end
 
-  def threefold_repetition?(history)
+  def threefold_repetition?(_history)
     false # probably should be implemented as boardstate hash counting occurances in chess.rb, future me issue
   end
 
-  def can_castle?(algebraic_notation, active_player)
+  def can_castle?(_algebraic_notation, _active_player)
 
-    # TO DO
+    true # TO DO
 
   end
 
   def king_would_be_in_check?
 
-    # TO DO
+    false # TO DO
 
   end
 
   def enemy_would_be_in_check?
 
-    # TO DO
+    false # TO DO
 
   end
 
   def would_conclude?
 
-    # TO DO
+    false # TO DO
     # Leverage concluded?, make a dube of board, perform the move on it and call concluded? on in
 
   end
