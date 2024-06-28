@@ -40,7 +40,7 @@ class Chess
   end
 
   def play
-    until board.concluded?
+    until board.concluded?(history)
       action = get_action
       break if action == 'save'
 
@@ -90,8 +90,10 @@ class Chess
     if action == 'save'
       prompt_save
       puts 'Game saved. See ya!'
-    else
+    elsif action.include?('#')
       puts "GGs! #{active_player == 'white' ? 'BLACK' : 'WHITE'} WINS! 🏆"
+    else
+      puts "It's a draw!"
     end
   end
 

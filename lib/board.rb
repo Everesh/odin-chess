@@ -85,9 +85,8 @@ class Board
     board[target[0]][target[1]].register_move
   end
 
-  def concluded?
-    # TO DO
-    # is a pad? || is a mat? || do both players habe insufficient material?
+  def concluded?(history)
+    insufficient_material? || checkmate? || stalemate? || threefold_repetition?(history) || fifty_move_rule?(history)
   end
 
   private
@@ -112,6 +111,36 @@ class Board
     end
 
     true
+  end
+
+  def checkmate?
+
+    #TO DO
+
+  end
+
+  def stalemate?
+
+    #TO DO
+
+  end
+
+  def insufficient_material?
+    pieces = board.flatten.reject { |cell| cell == ' ' }
+    return true if pieces.all? { |piece| piece.is_a?(King) }
+    return true if pieces.size == 3 && pieces.one? { |piece| piece.is_a?(Bishop) }
+    return true if pieces.size == 3 && pieces.one? { |piece| piece.is_a?(Knight) }
+    false
+  end
+
+  def fifty_move_rule?(history)
+    return false if history.length < 50
+
+    !history.any? { |str| str.include?('x') }
+  end
+
+  def threefold_repetition?(history)
+    false # probably should be implemented as boardstate hash counting occurances in chess.rb, future me issue
   end
 
   def can_castle?(algebraic_notation, active_player)
