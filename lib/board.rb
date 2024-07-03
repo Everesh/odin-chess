@@ -143,10 +143,38 @@ class Board
     false # TO DO, probably should be implemented as boardstate hash counting occurances in chess.rb, future me issue
   end
 
-  def can_castle?(_algebraic_notation, _active_player)
+  def can_castle?(algebraic_notation, active_player)
+    row = active_player == 'white' ? 0 : 7
+    unless board[row][4].is_a?(King) && board[row][4].color == active_player && !board[row][4].moved? && !is_safe?([row, 4], active_player)
+      puts '## King either moved or is directly thretened'
+      return false
+    end
 
-    true # TO DO
+    if algebraic_notation == 'O-O-O'
+      (1..3).each do |column|
+        unless board[row][column] == ' ' && !is_safe?([row, column], active_player)
+          puts "Position #{('a'.ord + column).chr}#{row+1} is either occupied or directly thretened"
+          return false
+        end
+      end
+      unless board[row][0].is_a?(Rook) && board[row][0].color == active_player && !board[row][0].moved? && !is_safe?([row, 0], active_player)
+        puts "Rook at #{('a'.ord + column).chr}#{row+1}either moved or the position is directly thretened"
+        return false
+      end
+    else
+      (5..6).each do |column|
+        unless board[row][column] == ' ' && !is_safe?([row, column], active_player)
+          puts "Position #{('a'.ord + column).chr}#{row+1} is either occupied or directly thretened"
+          return false
+        end
+      end
+      unless board[row][7].is_a?(Rook) && board[row][7].color == active_player && !board[row][7].moved? && !is_safe?([row, 7], active_player)
+        puts "Rook at #{('a'.ord + column).chr}#{row+1} either moved or the position is directly thretened"
+        return false
+      end
+    end
 
+    true
   end
 
   def deep_copy(obj)
