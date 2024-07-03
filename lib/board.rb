@@ -36,12 +36,12 @@ class Board
       return false
     end
 
-    if king_would_be_in_check?
+    if king_would_be_in_check?(algebraic_notation, active_player)
       puts '## Would result in putting your king in check'
       return false
     end
 
-    if enemy_would_be_in_check?
+    if enemy_would_be_in_check?(algebraic_notation, active_player)
       if would_conclude?
         unless algebraic_notation.match?(/#$/)
           puts '## Tailing mat declaration required \'#\''
@@ -149,16 +149,20 @@ class Board
 
   end
 
-  def king_would_be_in_check?
-
-      false # TO DO
-
+  def king_would_be_in_check?(algebraic_notation, active_player)
+    board_state = board.dup
+    move(algebraic_notation, active_player)
+    out = is_safe?(king_doko(active_player), active_player)
+    self.board = board_state
+    out
   end
 
-  def enemy_would_be_in_check?
-
-    false # TO DO
-
+  def enemy_would_be_in_check?(algebraic_notation, active_player)
+    board_state = board.dup
+    move(algebraic_notation, active_player)
+    out = is_safe?(king_doko(active_player), active_player == 'white' ? 'black' : 'white')
+    self.board = board_state
+    out
   end
 
   def would_conclude?
