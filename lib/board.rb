@@ -140,7 +140,7 @@ class Board
   end
 
   def threefold_repetition?(_history)
-    false # probably should be implemented as boardstate hash counting occurances in chess.rb, future me issue
+    false # TO DO, probably should be implemented as boardstate hash counting occurances in chess.rb, future me issue
   end
 
   def can_castle?(_algebraic_notation, _active_player)
