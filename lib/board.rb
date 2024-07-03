@@ -168,6 +168,55 @@ class Board
 
   end
 
+  def is_safe?(position, active_player)
+    [[2, 1], [2, -1], [1, 2], [-1, 2], [-2, 1], [-2, -1], [1, -2], [-1, -2]].each do |mv|
+      next if position[0] + mv[0] > 7 || position[0] + mv[0] < 0 || position[1] + mv[1] > 7 || position[1] + mv[1] < 0
+
+      return false if board[position[0] + mv[0]][position[1] + mv[1]].is_a?(Knight) && board[position[0] + mv[0]][position[1] + mv[1]].color != active_player
+    end
+
+    [[[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]],
+    [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0]],
+    [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7]],
+    [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7]]].each do |direction|
+      direction.each do |laser|
+        break if position[0] + laser[0] > 7 || position[0] + laser[0] < 0 || position[1] + laser[1] > 7 || position[1] + laser[1] < 0
+        next if board[position[0] + laser[0]][position[1] + laser[1]] == " "
+        break if board[position[0] + laser[0]][position[1] + laser[1]].color == active_player
+
+        return true if board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Rook) || board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Queen)
+      end
+    end
+
+    [[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]],
+    [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7]],
+    [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7]],
+    [[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7]]].each do |direction|
+      direction.each do |laser|
+        break if position[0] + laser[0] > 7 || position[0] + laser[0] < 0 || position[1] + laser[1] > 7 || position[1] + laser[1] < 0
+        next if board[position[0] + laser[0]][position[1] + laser[1]] == " "
+        break if board[position[0] + laser[0]][position[1] + laser[1]].color == active_player
+
+        return true if board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Bishop) || board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Queen)
+      end
+    end
+
+    pawn_captures = active_player == 'white' ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]]
+    pawn_captures.each do |laser|
+      next if position[0] + laser[0] > 7 || position[0] + laser[0] < 0 || position[1] + laser[1] > 7 || position[1] + laser[1] < 0
+      
+      return true if board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Pawn) && board[position[0] + laser[0]][position[1] + laser[1]].color != active_player
+    end
+
+    [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]].each do |laser|
+      next if position[0] + laser[0] > 7 || position[0] + laser[0] < 0 || position[1] + laser[1] > 7 || position[1] + laser[1] < 0
+
+      return true if board[position[0] + laser[0]][position[1] + laser[1]].is_a?(King) && board[position[0] + laser[0]][position[1] + laser[1]].color != active_player
+    end
+    
+    false
+  end
+
   def parse(algebraic_notation, active_player)
     @piece = define_piece(algebraic_notation)
     @target = define_target(algebraic_notation)
