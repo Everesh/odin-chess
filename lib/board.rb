@@ -42,7 +42,7 @@ class Board
     end
 
     if enemy_would_be_in_check?(algebraic_notation, active_player)
-      if would_conclude?
+      if would_conclude?(algebraic_notation, active_player, history)
         unless algebraic_notation.match?(/#$/)
           puts '## Tailing mat declaration required \'#\''
           return false
@@ -165,11 +165,12 @@ class Board
     out
   end
 
-  def would_conclude?
-
-    false # TO DO
-    # Leverage concluded?, make a dube of board, perform the move on it and call concluded? on in
-
+  def would_conclude?(algebraic_notation, active_player, history)
+    board_state = board.dup
+    move(algebraic_notation, active_player)
+    out = conclude?(history)
+    self.board = board_state
+    out
   end
 
   def king_doko(active_player)
