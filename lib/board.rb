@@ -149,8 +149,12 @@ class Board
 
   end
 
+  def deep_copy(obj)
+    Marshal.load(Marshal.dump(obj))
+  end
+
   def king_would_be_in_check?(algebraic_notation, active_player)
-    board_state = board.dup
+    board_state = deep_copy(board)
     move(algebraic_notation, active_player)
     out = is_safe?(king_doko(active_player), active_player)
     self.board = board_state
@@ -158,7 +162,7 @@ class Board
   end
 
   def enemy_would_be_in_check?(algebraic_notation, active_player)
-    board_state = board.dup
+    board_state = deep_copy(board)
     move(algebraic_notation, active_player)
     out = is_safe?(king_doko(active_player), active_player == 'white' ? 'black' : 'white')
     self.board = board_state
@@ -166,9 +170,9 @@ class Board
   end
 
   def would_conclude?(algebraic_notation, active_player, history)
-    board_state = board.dup
+    board_state = deep_copy(board)
     move(algebraic_notation, active_player)
-    out = conclude?(history)
+    out = concluded?(history)
     self.board = board_state
     out
   end
@@ -178,7 +182,7 @@ class Board
       (0..7).each do |column|
         next if board[row][column] == " "
 
-        return [[row],[column]] if board[row][column].is_a?(King) && board[row][column] == active_player
+        return [row, column] if board[row][column].is_a?(King) && board[row][column].color == active_player
       end
     end
     puts '## Faild to find active king'
