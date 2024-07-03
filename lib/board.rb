@@ -43,18 +43,18 @@ class Board
 
     if enemy_would_be_in_check?(algebraic_notation, active_player)
       if would_conclude?(algebraic_notation, active_player, history)
-        unless algebraic_notation.match?(/#$/)
+        unless algebraic_notation.end_with?('#')
           puts '## Tailing mat declaration required \'#\''
           return false
         end
       else
-        unless algebraic_notation.match?(/+$/)
+        unless algebraic_notation.end_with?('+')
           puts '## Tailing check declaration required \'+\''
           return false
         end
       end
     else
-      if algebraic_notation.match?(/[#+]$/)
+      if algebraic_notation.end_with?('#') || algebraic_notation.end_with?('+')
         puts '## Unwarranted tailing check declaration \'+\' or \'#\''
         return false
       end
@@ -164,7 +164,7 @@ class Board
   def enemy_would_be_in_check?(algebraic_notation, active_player)
     board_state = deep_copy(board)
     move(algebraic_notation, active_player)
-    out = is_safe?(king_doko(active_player), active_player == 'white' ? 'black' : 'white')
+    out = is_safe?(king_doko(active_player == 'white' ? 'black' : 'white'), active_player == 'white' ? 'black' : 'white')
     self.board = board_state
     out
   end
