@@ -151,7 +151,7 @@ class Board
 
   def king_would_be_in_check?
 
-    false # TO DO
+      false # TO DO
 
   end
 
@@ -166,6 +166,18 @@ class Board
     false # TO DO
     # Leverage concluded?, make a dube of board, perform the move on it and call concluded? on in
 
+  end
+
+  def king_doko(active_player)
+    (0..7).each do |row|
+      (0..7).each do |column|
+        next if board[row][column] == " "
+
+        return [[row],[column]] if board[row][column].is_a?(King) && board[row][column] == active_player
+      end
+    end
+    puts '## Faild to find active king'
+    raise StandardError
   end
 
   def is_safe?(position, active_player)
@@ -213,7 +225,7 @@ class Board
 
       return true if board[position[0] + laser[0]][position[1] + laser[1]].is_a?(King) && board[position[0] + laser[0]][position[1] + laser[1]].color != active_player
     end
-    
+
     false
   end
 
