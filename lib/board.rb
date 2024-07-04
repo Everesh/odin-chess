@@ -114,16 +114,29 @@ class Board
   end
 
   def checkmate?
+    king_w = king_doko('white')
+    king_b = king_doko('black')
+    return false if is_safe?(king_b, 'black') && is_safe?(king_w, 'white')
 
-    false #TO DO
-
+    !way_out?(is_safe?(king_w, 'white') ? 'black' : 'white')
   end
 
   def stalemate?
+    return false unless is_safe?(king_doko(@active_player == 'white' ? 'black' : 'white'), @active_player == 'white' ? 'black' : 'white')
 
-    false #TO DO
+    !way_out?(@active_player == 'white' ? 'black' : 'white')
+  end
+
+  def way_out?(_rescuey)
+
+    true # TO DO
+
+    # find all pieces of 'rescuey' color and simulate all of their moves
+    ### Return true if a move would result in the king of the 'rescuey' color not being in check
+    # Return true
 
   end
+  
 
   def insufficient_material?
     pieces = board.flatten.reject { |cell| cell == ' ' }
