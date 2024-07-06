@@ -5,18 +5,19 @@ The game will register [algebraic notation](https://en.wikipedia.org/wiki/Algebr
 ## Save command
 
 ```
-save [uninterupted_string]
+save
 ```
+
+A subsequent prompt will ask you to provide your desired file name (string devoid of whitespace characters)
 
 /* *Will store in saves/(uninterupted_string).yml*
 
 ## Load command
 
-On start if a save file is present in `saves/` it will be listed and can be loaded
-either via its designated number
+On start if at least a single save file is present in `saves/` they will all be listed and can be loaded via their designated number
 
 ```
-[1-n | uninterupted_string]
+[1-n]
 ```
 
 ## Algebraic notation
@@ -36,7 +37,7 @@ Destinguishes which piece is to make a move
 
 ### starting_position
 
-Only provided when the move could be performed by ultiple pieces
+Only provided when the move could be performed by multiple pieces
 When both parameters are required the column takes priority
 
 ```
@@ -64,7 +65,7 @@ Column has the priority over row
 ### promotion
 
 If the move is putting a pawn at the end of the column
-promotion is needed in the form of `=(piece_name)`
+promotion is needed in the form of `=piece_name`
 
 ```
 =[QBNR]
@@ -72,7 +73,7 @@ promotion is needed in the form of `=(piece_name)`
 
 ### Check
 
-If the move would put the enemy king into a check a `+` is appended
+If the move would put the enemy king into a check a `+` needs to be appended
 
 ```
 +
@@ -80,8 +81,7 @@ If the move would put the enemy king into a check a `+` is appended
 
 ### Mat
 
-If the move is putting the enemy king into a mat a `#` is appened
-and the game concludes
+If the move is putting the enemy king into a mat a `#` needs to be appened and the game concludes
 
 ```
 #
