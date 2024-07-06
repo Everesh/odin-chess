@@ -323,7 +323,7 @@ class Board
       end
     end
 
-    pawn_captures = active_player == 'white' ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]]
+    pawn_captures = active_player != 'white' ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]]
     pawn_captures.each do |laser|
       next if position[0] + laser[0] > 7 || position[0] + laser[0] < 0 || position[1] + laser[1] > 7 || position[1] + laser[1] < 0
       
