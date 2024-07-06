@@ -305,6 +305,7 @@ class Board
         break if board[position[0] + laser[0]][position[1] + laser[1]].color == active_player
 
         return true if board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Rook) || board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Queen)
+        break
       end
     end
 
@@ -318,6 +319,7 @@ class Board
         break if board[position[0] + laser[0]][position[1] + laser[1]].color == active_player
 
         return true if board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Bishop) || board[position[0] + laser[0]][position[1] + laser[1]].is_a?(Queen)
+        break
       end
     end
 
