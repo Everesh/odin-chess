@@ -3,45 +3,58 @@ board: !ruby/object:Board
   board:
   - - !ruby/object:Rook
       color: white
+      has_made_a_move: false
       chr: "♖"
     - !ruby/object:Knight
       color: white
+      has_made_a_move: false
       chr: "♘"
     - !ruby/object:Bishop
       color: white
+      has_made_a_move: false
       chr: "♗"
     - !ruby/object:Queen
       color: white
+      has_made_a_move: false
       chr: "♕"
     - !ruby/object:King
       color: white
+      has_made_a_move: false
       chr: "♔"
     - !ruby/object:Bishop
       color: white
+      has_made_a_move: false
       chr: "♗"
     - " "
     - !ruby/object:Rook
       color: white
+      has_made_a_move: false
       chr: "♖"
   - - !ruby/object:Pawn
       color: white
+      has_made_a_move: false
       chr: "♙"
     - !ruby/object:Pawn
       color: white
+      has_made_a_move: false
       chr: "♙"
     - !ruby/object:Pawn
       color: white
+      has_made_a_move: false
       chr: "♙"
     - " "
     - " "
     - !ruby/object:Pawn
       color: white
+      has_made_a_move: false
       chr: "♙"
     - !ruby/object:Pawn
       color: white
+      has_made_a_move: false
       chr: "♙"
     - !ruby/object:Pawn
       color: white
+      has_made_a_move: false
       chr: "♙"
   - - " "
     - " "
@@ -50,6 +63,7 @@ board: !ruby/object:Board
     - " "
     - !ruby/object:Knight
       color: white
+      has_made_a_move: true
       chr: "♘"
     - " "
     - " "
@@ -58,9 +72,11 @@ board: !ruby/object:Board
     - " "
     - !ruby/object:Pawn
       color: white
+      has_made_a_move: true
       chr: "♙"
     - !ruby/object:Pawn
       color: white
+      has_made_a_move: true
       chr: "♙"
     - " "
     - " "
@@ -71,6 +87,7 @@ board: !ruby/object:Board
     - " "
     - !ruby/object:Pawn
       color: black
+      has_made_a_move: true
       chr: "♟︎"
     - " "
     - " "
@@ -79,6 +96,7 @@ board: !ruby/object:Board
     - " "
     - !ruby/object:Knight
       color: black
+      has_made_a_move: true
       chr: "♞"
     - " "
     - " "
@@ -87,47 +105,74 @@ board: !ruby/object:Board
     - " "
   - - !ruby/object:Pawn
       color: black
+      has_made_a_move: false
       chr: "♟︎"
     - !ruby/object:Pawn
       color: black
+      has_made_a_move: false
       chr: "♟︎"
     - !ruby/object:Pawn
       color: black
+      has_made_a_move: false
       chr: "♟︎"
     - !ruby/object:Pawn
       color: black
+      has_made_a_move: false
       chr: "♟︎"
     - " "
     - !ruby/object:Pawn
       color: black
+      has_made_a_move: false
       chr: "♟︎"
     - !ruby/object:Pawn
       color: black
+      has_made_a_move: false
       chr: "♟︎"
     - !ruby/object:Pawn
       color: black
+      has_made_a_move: false
       chr: "♟︎"
   - - !ruby/object:Rook
       color: black
+      has_made_a_move: false
       chr: "♜"
     - " "
     - !ruby/object:Bishop
       color: black
+      has_made_a_move: false
       chr: "♝"
     - !ruby/object:Queen
       color: black
+      has_made_a_move: false
       chr: "♛"
     - !ruby/object:King
       color: black
+      has_made_a_move: false
       chr: "♚"
     - !ruby/object:Bishop
       color: black
+      has_made_a_move: false
       chr: "♝"
     - !ruby/object:Knight
       color: black
+      has_made_a_move: false
       chr: "♞"
     - !ruby/object:Rook
       color: black
+      has_made_a_move: false
       chr: "♜"
-active_player: 'black'
-history: ['e4', 'e5', 'Kf3', 'Kc6', 'd4']
+  piece: !ruby/class 'Pawn'
+  target:
+  - 3
+  - 3
+  capture: false
+  origin:
+  - 1
+  - 3
+active_player: black
+history:
+- e4
+- e5
+- Nf3
+- Nc6
+- d4

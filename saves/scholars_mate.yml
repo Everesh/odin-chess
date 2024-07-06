@@ -13,18 +13,12 @@ board: !ruby/object:Board
       color: white
       has_made_a_move: false
       chr: "♗"
-    - !ruby/object:Queen
-      color: white
-      has_made_a_move: false
-      chr: "♕"
+    - " "
     - !ruby/object:King
       color: white
       has_made_a_move: false
       chr: "♔"
-    - !ruby/object:Bishop
-      color: white
-      has_made_a_move: false
-      chr: "♗"
+    - " "
     - !ruby/object:Knight
       color: white
       has_made_a_move: false
@@ -49,10 +43,7 @@ board: !ruby/object:Board
       color: white
       has_made_a_move: false
       chr: "♙"
-    - !ruby/object:Pawn
-      color: white
-      has_made_a_move: false
-      chr: "♙"
+    - " "
     - !ruby/object:Pawn
       color: white
       has_made_a_move: false
@@ -75,9 +66,15 @@ board: !ruby/object:Board
     - " "
   - - " "
     - " "
+    - !ruby/object:Bishop
+      color: white
+      has_made_a_move: true
+      chr: "♗"
     - " "
-    - " "
-    - " "
+    - !ruby/object:Pawn
+      color: white
+      has_made_a_move: true
+      chr: "♙"
     - " "
     - " "
     - " "
@@ -85,14 +82,26 @@ board: !ruby/object:Board
     - " "
     - " "
     - " "
+    - !ruby/object:Pawn
+      color: black
+      has_made_a_move: true
+      chr: "♟︎"
     - " "
     - " "
-    - " "
-    - " "
+    - !ruby/object:Queen
+      color: white
+      has_made_a_move: true
+      chr: "♕"
   - - " "
     - " "
-    - " "
-    - " "
+    - !ruby/object:Knight
+      color: black
+      has_made_a_move: true
+      chr: "♞"
+    - !ruby/object:Pawn
+      color: black
+      has_made_a_move: true
+      chr: "♟︎"
     - " "
     - " "
     - " "
@@ -109,14 +118,8 @@ board: !ruby/object:Board
       color: black
       has_made_a_move: false
       chr: "♟︎"
-    - !ruby/object:Pawn
-      color: black
-      has_made_a_move: false
-      chr: "♟︎"
-    - !ruby/object:Pawn
-      color: black
-      has_made_a_move: false
-      chr: "♟︎"
+    - " "
+    - " "
     - !ruby/object:Pawn
       color: black
       has_made_a_move: false
@@ -133,10 +136,7 @@ board: !ruby/object:Board
       color: black
       has_made_a_move: false
       chr: "♜"
-    - !ruby/object:Knight
-      color: black
-      has_made_a_move: false
-      chr: "♞"
+    - " "
     - !ruby/object:Bishop
       color: black
       has_made_a_move: false
@@ -161,5 +161,19 @@ board: !ruby/object:Board
       color: black
       has_made_a_move: false
       chr: "♜"
+  piece: !ruby/class 'Pawn'
+  target:
+  - 5
+  - 3
+  capture: false
+  origin:
+  - 6
+  - 3
 active_player: white
-history: []
+history:
+- e4
+- e5
+- Bc4
+- Nc6
+- Qh5
+- d6
