@@ -2,6 +2,10 @@
 
 A ruby implementation of the traditional game of chess
 
-[See rules](./help/rules.md)
+### How to play
 
-[See input syntax](./help/input.md) \* *Variation of the algebraic notation*
+1. [See rules](./help/rules.md)
+
+2. [See input syntax](./help/input.md) \* *Variation of the algebraic notation*
+
+3. run `ruby play.rb`
