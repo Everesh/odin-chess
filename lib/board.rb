@@ -271,7 +271,7 @@ class Board
   def would_conclude?(algebraic_notation, active_player, history)
     board_state = deep_copy(board)
     move(algebraic_notation, active_player)
-    out = concluded?(history)
+    out = concluded?(history.dup << algebraic_notation)
     self.board = board_state
     out
   end
