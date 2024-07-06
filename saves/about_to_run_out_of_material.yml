@@ -1,0 +1,78 @@
+---
+board: !ruby/object:Board
+  board:
+  - - !ruby/object:Rook
+      color: black
+      has_made_a_move: true
+      chr: "♜"
+    - !ruby/object:King
+      color: white
+      has_made_a_move: true
+      chr: "♔"
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - !ruby/object:King
+      color: black
+      has_made_a_move: true
+      chr: "♚"
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+active_player: white
+history: []

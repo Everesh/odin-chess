@@ -1,0 +1,167 @@
+---
+board: !ruby/object:Board
+  board:
+  - - !ruby/object:Rook
+      color: white
+      has_made_a_move: false
+      chr: "♖"
+    - !ruby/object:Knight
+      color: white
+      has_made_a_move: false
+      chr: "♘"
+    - !ruby/object:Bishop
+      color: white
+      has_made_a_move: false
+      chr: "♗"
+    - " "
+    - " "
+    - !ruby/object:Rook
+      color: white
+      has_made_a_move: true
+      chr: "♖"
+    - !ruby/object:King
+      color: white
+      has_made_a_move: true
+      chr: "♔"
+    - " "
+  - - !ruby/object:Pawn
+      color: white
+      has_made_a_move: false
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      has_made_a_move: false
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      has_made_a_move: false
+      chr: "♙"
+    - " "
+    - " "
+    - !ruby/object:Pawn
+      color: white
+      has_made_a_move: false
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      has_made_a_move: false
+      chr: "♙"
+    - !ruby/object:Pawn
+      color: white
+      has_made_a_move: false
+      chr: "♙"
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - !ruby/object:Bishop
+      color: white
+      has_made_a_move: true
+      chr: "♗"
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - !ruby/object:Queen
+      color: white
+      has_made_a_move: true
+      chr: "♕"
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - " "
+  - - " "
+    - " "
+    - " "
+    - " "
+    - " "
+    - !ruby/object:King
+      color: black
+      has_made_a_move: true
+      chr: "♚"
+    - " "
+    - " "
+  piece: !ruby/class 'King'
+  target:
+  - 7
+  - 5
+  capture: false
+  origin:
+  - 6
+  - 4
+active_player: white
+history:
+- e4
+- e5
+- Nf3
+- Nc6
+- d4
+- xd4
+- Nxd4
+- Nxd4
+- Qxd4
+- c5
+- Qd1
+- d5
+- xd5
+- Qxd5
+- Qxd5
+- c4
+- Qxc4
+- b6
+- Qxc8+
+- Ke7
+- Qxa8
+- a6
+- Qxf8+
+- Ke6
+- Qxg8
+- g6
+- Qxh8
+- f6
+- Qxh7
+- b5
+- Qxg6
+- Kd7
+- Qxf6
+- Ke8
+- Qxa6
+- Kf8
+- Qxb5
+- Kg8
+- Qb6
+- Kf8
+- Qf6+
+- Kg8
+- Qg6+
+- Kf8
+- Ba6
+- Ke7
+- O-O
+- Kf8
