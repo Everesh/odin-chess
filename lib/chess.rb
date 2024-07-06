@@ -116,7 +116,7 @@ class Chess
       hash[var.to_s.delete('@')] = instance_variable_get(var)
     end
 
-    File.open("./saves/#{str}.yml", 'w') do |file|
+    File.open("./saves/#{str[0]}.yml", 'w') do |file|
       YAML.dump(instance_data, file)
     end
   end
