@@ -20,9 +20,7 @@ Pieces can be moved to a space if
 Pawns can move 2 up if its the first move they would perform
 
 ###### En passant
-Pawn can capture other pawns as if the initial move was
-a normal pawn move the very next turn after it has been used
-*I can't be assed to formualte this coherently, you know what enpassant is*
+If a pawn uses aformentioned innitial move, it can be captured as if it moved just 1 space the very next turn by enemy pawns
 
 ###### Castling
 IF the king has not yet moved
@@ -54,7 +52,7 @@ The game ends if
 
 #### Queen
 
-Any distance in straight or diagonaly
+Any distance straight or diagonaly
 
 #### Bishop
 
