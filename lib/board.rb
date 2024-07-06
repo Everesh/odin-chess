@@ -86,7 +86,7 @@ class Board
   end
 
   def concluded?(history)
-    insufficient_material? || checkmate? || stalemate? || threefold_repetition?(history) || fifty_move_rule?(history)
+    insufficient_material? || checkmate?(history) || stalemate?(history) || threefold_repetition?(history) || fifty_move_rule?(history)
   end
 
   private
@@ -113,30 +113,88 @@ class Board
     true
   end
 
-  def checkmate?
-    king_w = king_doko('white')
-    king_b = king_doko('black')
-    return false if is_safe?(king_b, 'black') && is_safe?(king_w, 'white')
+  def checkmate?(history)
+    return false if is_safe?(king_doko(history.length.odd? ? 'black' : 'white'), history.length.odd? ? 'black' : 'white')
 
-    !way_out?(is_safe?(king_w, 'white') ? 'black' : 'white')
+    !way_out?(history.length.odd? ? 'black' : 'white')
   end
 
-  def stalemate?
-    return false unless is_safe?(king_doko(@active_player == 'white' ? 'black' : 'white'), @active_player == 'white' ? 'black' : 'white')
+  def stalemate?(history)
+    return false unless is_safe?(king_doko(history.length.odd? ? 'black' : 'white'), history.length.odd? ? 'black' : 'white')
 
-    !way_out?(@active_player == 'white' ? 'black' : 'white')
+    !way_out?(history.length.odd? ? 'black' : 'white')
   end
 
-  def way_out?(_rescuey)
-
-    true # TO DO
-
-    # find all pieces of 'rescuey' color and simulate all of their moves
-    ### Return true if a move would result in the king of the 'rescuey' color not being in check
-    # Return true
-
+  def way_out?(rescuey)
+    pieces = []
+    board.each_with_index { |line, row| line.each_with_index { |item, column| pieces << [item, row, column] if item != ' ' && item.color == rescuey } }
+    until pieces.empty?
+      testing = pieces.pop
+      return true if has_legal_move?(testing)
+    end
+    false
   end
   
+  def has_legal_move?(testee)
+    moveset = []
+    if testee[0].is_a?(King)
+      [[[1, 0]], [[1, 1]], [[0, 1]], [[-1, 1]], [[-1, 0]], [[-1, -1]], [[0, -1]], [[1, -1]]].each { |move_block| moveset << move_block }
+    elsif testee[0].is_a?(Rook)
+      [[[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]],
+       [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0]],
+       [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7]],
+       [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7]]].each { |move_block| moveset << move_block }
+    elsif testee[0].is_a?(Bishop)
+      [[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]],
+       [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7]],
+       [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7]],
+       [[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7]]].each { |move_block| moveset << move_block }
+    elsif testee[0].is_a?(Queen)
+      [[[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]],
+       [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0]],
+       [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7]],
+       [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7]],
+       [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]],
+       [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7]],
+       [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7]],
+       [[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7]]].each { |move_block| moveset << move_block }
+    elsif testee[0].is_a?(Knight)
+      [[[2, 1]], [[2, -1]], [[1, 2]], [[-1, 2]], [[-2, 1]], [[-2, -1]], [[1, -2]], [[-1, -2]]].each { |move_block| moveset << move_block }
+    elsif testee[0].is_a?(Pawn)
+      if testee[0].color == 'white'
+        moveset << [[1, 0]]
+        moveset << [[1, 1]] if testee[2] + 1 <= 7 && board[testee[1] + 1][testee[2] + 1] != ' ' && board[testee[1] + 1][testee[2] + 1].color == 'black'
+        moveset << [[1, -1]] if testee[2] - 1 >= 0 && board[testee[1] + 1][testee[2] - 1] != ' ' && board[testee[1] + 1][testee[2] - 1].color == 'black'
+      else
+        moveset << [[-1, 0]]
+        moveset << [[-1, 1]] if testee[2] + 1 <= 7 && board[testee[1] - 1][testee[2] + 1] != ' ' && board[testee[1] - 1][testee[2] + 1].color == 'white'
+        moveset << [[-1, -1]] if testee[2] - 1 >= 0 && board[testee[1] - 1][testee[2] - 1] != ' ' && board[testee[1] - 1][testee[2] - 1].color == 'white'
+      end
+    else
+      puts "### Piece moveset not found"
+      raise StandardError
+    end
+
+    moveset.each do |moves|
+      until moves.empty?
+        move = moves.shift
+        break if testee[1] + move[0] > 7 || testee[1] + move[0] < 0 || testee[2] + move[1] > 7 || testee[2] + move[1] < 0
+        break if board[testee[1] + move[0]][testee[2] + move[1]] != " " && board[testee[1] + move[0]][testee[2] + move[1]].color == testee[0].color
+
+        board_copy = deep_copy(board)
+        board[testee[1] + move[0]][testee[2] + move[1]] = board[testee[1]][testee[2]]
+        board[testee[1]][testee[2]] = ' '
+        is_an_out = is_safe?(king_doko(testee[0].color), testee[0].color)
+        self.board = board_copy
+
+        return true unless is_an_out
+
+        break if board[testee[1] + move[0]][testee[2] + move[1]] != " " && board[testee[1] + move[0]][testee[2] + move[1]].color != testee[0].color
+      end
+    end
+
+    return false
+  end
 
   def insufficient_material?
     pieces = board.flatten.reject { |cell| cell == ' ' }
